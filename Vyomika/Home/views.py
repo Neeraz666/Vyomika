@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 matplotlib.use('Agg')
 
 # Create your views here.
+
+def about(request):
+    return render(request, 'Home/about.html')
+
 def create_barplot(*args):
     plt.bar(args[0], args[1])
     plt.xlabel('Names')
