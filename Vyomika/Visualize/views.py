@@ -12,25 +12,29 @@ def createGraph(request):
         fname = request.POST.get('name')
         datas = request.POST.get('data')
         names = request.POST.get('names')
+        
+        visualize = Visualize.objects.create(fname=fname, datas=datas, names=names)
 
         marks = datas.split(',')
         data_list = []
         name_list = names.split(',')
 
         for data in marks:
+            data = data.strip()
             data_list.append(int(data))
 
         sns.set(style='darkgrid')
         plt.bar(name_list, data_list)
-        plt.xlabel('Names', 'Marks')
+        plt.xlabel('Names')
+        plt.ylabel('Marks')
         plt.title('Marks of students')
 
         image_buffer = BytesIO()
         plt.savefig(image_buffer, format='png')
         image_buffer.seek(0)
 
-        visualize = Visualize.objects.create(fname=fname,datas=datas, names=names)
-        visualize.graph.save('graph.png', image_buffer)
+        filename =f'graph{Visualize.snum}.png'    
+        visualize.graph.save(filename, image_buffer)
     return render(request, 'Visualize/data.html')
 
 def displayGraph(request, snum):
