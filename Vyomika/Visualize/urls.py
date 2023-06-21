@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.createGraph, name='createGraph'),
-    path('display/<int:snum>', views.displayGraph, name='displayGraph'),
+    path('display', views.displayGraph, name='displayGraph'),
 ]

@@ -13,14 +13,12 @@ def createGraph(request):
         datas = request.POST.get('data')
         names = request.POST.get('names')
 
+        marks = datas.split(',')
         data_list = []
-        name_list = []
+        name_list = names.split(',')
 
-        for data in datas.split(','):
+        for data in marks:
             data_list.append(int(data))
-        
-        for name in names.split(','):
-            name_list.append(name)
 
         sns.set(style='darkgrid')
         plt.bar(name_list, data_list)
@@ -33,8 +31,9 @@ def createGraph(request):
 
         visualize = Visualize.objects.create(fname=fname,datas=datas, names=names)
         visualize.graph.save('graph.png', image_buffer)
+    return render(request, 'Visualize/data.html')
 
 def displayGraph(request, snum):
     data = Visualize.objects.filter(snum=snum)
     context = {'data':data}
-    return render(request, 'Visualize/display.html')
+    return render(request, 'Visualize/display.html', context)
