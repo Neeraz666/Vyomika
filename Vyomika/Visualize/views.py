@@ -7,8 +7,9 @@ import matplotlib.pyplot as plt
 from .models import Visualize
 
 # Create your views here.
-def datainput(request):
+def createGraph(request):
     if request.method == 'POST':
+        fname = request.POST.get('name')
         datas = request.POST.get('data')
         names = request.POST.get('names')
 
@@ -30,7 +31,10 @@ def datainput(request):
         plt.savefig(image_buffer, format='png')
         image_buffer.seek(0)
 
-        visualize = Visualize(datas=datas, names=names)
+        visualize = Visualize.objects.create(fname=fname,datas=datas, names=names)
         visualize.graph.save('graph.png', image_buffer)
 
-    return render(request, 'Visualize/data.html')
+def displayGraph(request, snum):
+    data = Visualize.objects.filter(snum=snum)
+    context = {'data':data}
+    return render(request, 'Visualize/display.html')
