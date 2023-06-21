@@ -4,5 +4,6 @@ matplotlib
 pandas
 numpy
 scipy
+psycopg2
 
 
