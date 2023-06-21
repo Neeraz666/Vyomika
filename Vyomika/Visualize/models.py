@@ -7,4 +7,7 @@ class Visualize(models.Model):
     fname = models.CharField(max_length=55, default='')
     datas = models.CharField(max_length=100, default='')
     names = models.CharField(max_length=255, default='')
-    graph = models.ImageField(default='', upload_to='graphs/')
+    graph = models.ImageField(default='', upload_to='')
+
+    def __str__(self):
+        return self.fname+"'s Data" 

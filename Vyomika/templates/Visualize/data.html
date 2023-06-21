@@ -4,7 +4,7 @@
 {% block body %}
 <div class="container">
     <div class="container my-3">
-        <h3>Contact iCoder Admin</h3>
+        <h3>Post your datas to visualize</h3>
         <form action="#" method="post">{% csrf_token %}
             <div class="form-group">
                 <label for="name">Name</label>
@@ -21,9 +21,14 @@
                 <input type="text" class="form-control" id="ylabel" name="data" placeholder="Separated by Comma" required>
             </div>
 
-            <button type="submit" class="btn btn-primary m-2" href='/display' >Submit</button>
+            <button type="submit" class="btn btn-primary m-2">Submit</button>
 
         </form>
+
+        {% if data %}
+        <a href="{% url 'displayGraph' data.snum %}" class="btn btn-primary m-2">Visualize</a>
+        {% endif %}
+        
     </div>
 </div>
 {% endblock %}

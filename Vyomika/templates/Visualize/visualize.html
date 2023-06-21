@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %} Vyomika {% endblock title %}
+{% block body %}
+<h3>Graph Display</h3>
+{% if data %}
+<div>
+    <p>Name: {{ data.fname }}</p>
+    <p>Data: {{ data.datas }}</p>
+    <p>Names: {{ data.names }}</p>
+</div>
+<img src="/Vyomika/media/graph4.png" alt="Graph Image">
+{% endif %}
+{% endblock %}

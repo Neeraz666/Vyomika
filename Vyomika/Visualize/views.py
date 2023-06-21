@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse, redirect
 from io import BytesIO
 import matplotlib
 matplotlib.use('Agg')
@@ -7,13 +7,12 @@ import matplotlib.pyplot as plt
 from .models import Visualize
 
 # Create your views here.
+
 def createGraph(request):
     if request.method == 'POST':
         fname = request.POST.get('name')
         datas = request.POST.get('data')
         names = request.POST.get('names')
-        
-        visualize = Visualize.objects.create(fname=fname, datas=datas, names=names)
 
         marks = datas.split(',')
         data_list = []
@@ -33,11 +32,16 @@ def createGraph(request):
         plt.savefig(image_buffer, format='png')
         image_buffer.seek(0)
 
-        filename =f'graph{Visualize.snum}.png'    
+        filename = f'graph{Visualize.objects.count() + 1}.png'
+        visualize = Visualize(fname=fname, datas=datas, names=names)
+        visualize.save()
         visualize.graph.save(filename, image_buffer)
+
+        return redirect('displayGraph', snum=visualize.snum)
+
     return render(request, 'Visualize/data.html')
 
 def displayGraph(request, snum):
-    data = Visualize.objects.filter(snum=snum)
-    context = {'data':data}
-    return render(request, 'Visualize/display.html', context)
+    data = Visualize.objects.filter(snum=snum).first()
+    context = {'data': data}
+    return render(request, 'Visualize/visualize.html', context)
