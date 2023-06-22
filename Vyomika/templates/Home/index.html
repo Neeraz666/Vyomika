@@ -3,9 +3,20 @@
 {% block title %} Vyomika {% endblock title %}
 {% block homeactive %} active {% endblock homeactive %}
 {% block body %}
-<div class="container">
-    <h1>Bar Graphs</h1>
-    {% load static %}
-    <img src="{% static 'dog.png' %}" alt="Graph">
-</div>
+<header class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">Welcome to My Awesome Website!</h1>
+        <p class="hero-subtitle">Discover the Amazing World of Information</p>
+        <a href="#about" class="btn btn-primary">Learn More</a>
+    </div>
+</header>
+
+<section id="about" class="about-section">
+    <div class="container">
+        <h2 class="section-title">About Us</h2>
+        <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor
+            tristique mi, in aliquam est auctor vitae. Vestibulum ante ipsum primis in faucibus orci luctus et
+            ultrices posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas.</p>
+    </div>
 {% endblock %}
