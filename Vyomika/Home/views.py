@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from .models import Contact
 
 # Create your views here.
@@ -14,8 +15,12 @@ def contactUs(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         comment = request.POST.get('comment')
-
-        contact = Contact(name=name, email=email, comment=comment)
-        contact.save()
+        
+        if len(name)<2 or len(email)<3 or len(comment)<5:
+            messages.error(request, "Please fill the form correctly")
+        else:
+            contact=Contact(name=name, email=email, comment=comment)
+            contact.save()
+            messages.success(request, "Your message has been successfully sent")
 
     return render(request, 'Home/contact.html')

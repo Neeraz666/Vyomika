@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} {% endblock %}</title>
-    <style>{% block style%} {% endblock %}</style>
+    <style>
+        {% block style %} {% endblock %}
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
@@ -28,12 +30,13 @@
                                 href="/" style="color: rgba(0, 0, 0, 0.742);">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block aboutactive %}  {% endblock aboutactive %}" href="/about" style="color: rgba(0, 0, 0, 0.742);">About
+                            <a class="nav-link {% block aboutactive %}  {% endblock aboutactive %}" href="/about"
+                                style="color: rgba(0, 0, 0, 0.742);">About
                                 Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {% block contactactive %}  {% endblock contactactive %}"
-                                href="/contact" style="color: rgba(0, 0, 0, 0.742);">Contact</a>
+                            <a class="nav-link {% block contactactive %}  {% endblock contactactive %}" href="/contact"
+                                style="color: rgba(0, 0, 0, 0.742);">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -59,6 +62,16 @@
         <div class="col-md-12 my-2 d-flex justify-content-end">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </div>
+
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>Message: </strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+
         {% block body %}
 
         {% endblock %}
@@ -105,7 +118,15 @@
             </div>
         </footer>
 
-
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
             crossorigin="anonymous"></script>
