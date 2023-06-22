@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container">
                 <a class="navbar-brand" href="#">VYOMIKA</a>
@@ -37,13 +37,13 @@
                     </ul>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                    <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="visually-hidden">Toggle Dropdown</span>
                     </button>
                     <ul class="dropdown-menu" style="left: 50% !important;
                     transform: translateX(-50%);">
-                        <li><a class="dropdown-item" href="#">Attendance System</a></li>
+                        <li><a class="dropdown-item" href="/management/">Student Management System</a></li>
                         <li><a class="dropdown-item" href="/visualize/post/">Visualize</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -55,7 +55,7 @@
 
             </div>
         </nav>
-        <div class="col-md-12 my-2" style="width: 12%; float: right;">
+        <div class="col-md-12 my-2 d-flex justify-content-end">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </div>
         {% block body %}
