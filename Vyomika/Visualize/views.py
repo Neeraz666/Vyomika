@@ -32,9 +32,10 @@ def createGraph(request):
         plt.savefig(image_buffer, format='png')
         image_buffer.seek(0)
 
-        filename = f'graph{Visualize.objects.count() + 1}.png'
         visualize = Visualize(fname=fname, datas=datas, names=names)
         visualize.save()
+
+        filename = f'graph{visualize.snum}.png'
         visualize.graph.save(filename, image_buffer)
 
         return redirect('displayGraph', snum=visualize.snum)
@@ -43,5 +44,6 @@ def createGraph(request):
 
 def displayGraph(request, snum):
     data = Visualize.objects.filter(snum=snum).first()
-    context = {'data': data}
+    url = f'/media/graph{snum}.png'
+    context = {'data': data, 'url':url}
     return render(request, 'Visualize/visualize.html', context)

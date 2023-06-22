@@ -5,6 +5,7 @@
 {% block body %}
 <div class="container">
     <h1>Bar Graphs</h1>
-    <img src="{{plot_path}}" alt="">
+    {% load static %}
+    <img src="{% static 'dog.png' %}" alt="Graph">
 </div>
 {% endblock %}
