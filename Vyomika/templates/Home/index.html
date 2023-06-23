@@ -2,21 +2,111 @@
 
 {% block title %} Vyomika {% endblock title %}
 {% block homeactive %} active {% endblock homeactive %}
-{% block body %}
-<header class="hero-section">
-    <div class="container">
-        <h1 class="hero-title">Welcome to My Awesome Website!</h1>
-        <p class="hero-subtitle">Discover the Amazing World of Information</p>
-        <a href="#about" class="btn btn-primary">Learn More</a>
-    </div>
-</header>
+{% block style %}
+/* Start Global Rules */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* End Global Rules */
 
-<section id="about" class="about-section">
-    <div class="container">
-        <h2 class="section-title">About Us</h2>
-        <p class="section-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor
-            tristique mi, in aliquam est auctor vitae. Vestibulum ante ipsum primis in faucibus orci luctus et
-            ultrices posuere cubilia Curae; Pellentesque habitant morbi tristique senectus et netus et malesuada
-            fames ac turpis egestas.</p>
-    </div>
+/* Start Landing Page */
+.landing-page .content .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 140px;
+  min-height: calc(100vh - 80px);
+}
+@media (max-width: 767px) {
+  .landing-page .content .container {
+    gap: 0;
+    min-height: calc(100vh - 101px);
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+}
+@media (max-width: 767px) {
+  .landing-page .content .info {
+    text-align: center;
+    margin-bottom: 15px 
+  }
+}
+.landing-page .content .info h1 {
+  color: #5d5d5d;
+  font-size: 44px;
+}
+.landing-page .content .info p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #5d5d5d;
+}
+.landing-page .content .info button {
+  border: 0;
+  border-radius: 20px;
+  padding: 12px 30px;
+  margin-top: 30px;
+  cursor: pointer;
+  color: #FFF;
+  background-color: #6c63ff;
+}
+.landing-page .content .image img {
+  max-width: 100%;
+}
+/* End Landing Page */
+
+{% endblock %}
+{% block body %}
+{% load static %}
+      <!-- Start Landing Page -->
+      <div class="landing-page">
+        <div class="content">
+          <div class="container">
+            <div class="info">
+              <h1>Looking For Inspiration</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus odit nihil ullam nesciunt quidem iste, Repellendus odit nihil</p>
+              <button>Button name</button>
+            </div>
+            <div class="image">
+              <img src="{% static 'logo1.png' %}" alt='Logo' style="height:fit-content;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Landing Page -->
 {% endblock %}
