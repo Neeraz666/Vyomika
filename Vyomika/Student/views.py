@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.core.files.storage import default_storage
 from .models import Student
 
@@ -31,5 +31,6 @@ def addStudent(request):
         
         student.save()
         # stdData = {'stdname':stdname, 'stdemail':stdemail, 'stdadd':stdadd, 'stdphone':stdphone, 'stdfaculty':stdfaculty, 'stdgender':stdgender}
+        return redirect('/management/faculty/student/')
 
     return render(request, 'Student/addstd.html')

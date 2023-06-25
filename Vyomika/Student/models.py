@@ -9,7 +9,7 @@ class Student(models.Model):
     stdphone = models.CharField(default='', max_length=10)
     stdfaculty = models.CharField(default='', max_length=55)
     stdgender = models.CharField(default='', max_length=6)
-    stdimage = models.ImageField(default='', upload_to='')
+    stdimage = models.ImageField(default='', upload_to='stdimg')
 
     def __str__(self):
         return self.stdname+' Id: '+str(self.std_id)
