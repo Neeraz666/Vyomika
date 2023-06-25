@@ -6,7 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %} {% endblock %}</title>
     <style>
-        {% block style %}
+        .btn.btn-primary {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: bold;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            padding: 0 3rem;
+            border: 0;
+            border-radius: 3rem;
+            background-image: linear-gradient(131deg, #ffd340, #ff923c, #ff923c, #ff923c);
+            background-size: 300% 100%;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn.btn-primary:hover:enabled {
+            box-shadow: 0 0.5em 0.5em -0.4em #ff923cba;
+            background-size: 100% 100%;
+            transform: translateY(-0.15em);
+        }
+
+            {% block style %}
 
             {% endblock %}
     </style>
@@ -16,153 +35,157 @@
 
 <body>
     {% load static %}
-    
-        <div class="container">
-            <nav class="navbar navbar-expand-lg bg-body-tertiary" style="height: 4.5em;">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-light dropdown-toggle-split" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list"
-                            viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                        </svg>
-                        <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                </div>
-                <div class="container">
-                    <a class="navbar-brand" href="/"><img src="{% static 'vlogo.png' %}" alt="logo"
-                            style="height: 5em; margin: -2em;"> YOMIKA</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent"
-                        style="justify-content:center; font-size: large">
-                        <ul class="nav nav-underline">
-                            <li class="nav-item">
-                                <a class="nav-link {% block homeactive %}  {% endblock homeactive %}" aria-current="page" href="/"
-                                    style="color: rgba(0, 0, 0, 0.742);">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% block aboutactive %}  {% endblock aboutactive %}" href="/about"
-                                    style="color: rgba(0, 0, 0, 0.742);">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% block contactactive %}  {% endblock contactactive %}" href="/contact"
-                                    style="color: rgba(0, 0, 0, 0.742);">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="d-grid gap-2" style="float: right;">
-                        <button class="btn btn-primary " type="button">Login</button>
-                    </div>
-                </div>
-            </nav>
-            
-            <!-- Offcanvas menu -->
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="nav flex-column">
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="height: 4.5em;">
+            <div class="btn-group">
+                <button type="button" class="btn btn-light dropdown-toggle-split" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasMenu" aria-controls="offcanvasMenu" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+            </div>
+            <div class="container">
+                <a class="navbar-brand" href="/"><img src="{% static 'vlogo.png' %}" alt="logo"
+                        style="height: 5em; margin: -2em;"> YOMIKA</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent"
+                    style="justify-content:center; font-size: large">
+                    <ul class="nav nav-underline">
                         <li class="nav-item">
-                            <a class="nav-link" href="/management/">Student Management System</a>
+                            <a class="nav-link {% block homeactive %}  {% endblock homeactive %}" aria-current="page"
+                                href="/" style="color: rgba(0, 0, 0, 0.742);">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/visualize/post/">Visualize</a>
+                            <a class="nav-link {% block aboutactive %}  {% endblock aboutactive %}" href="/about"
+                                style="color: rgba(0, 0, 0, 0.742);">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sign Out</a>
+                            <a class="nav-link {% block contactactive %}  {% endblock contactactive %}" href="/contact"
+                                style="color: rgba(0, 0, 0, 0.742);">Contact</a>
                         </li>
                     </ul>
                 </div>
+                <div class="d-grid gap-2" style="float: right;">
+                    <button class="btn btn-primary " type="button">Login</button>
+                </div>
             </div>
-            
-            <div class="col-md-12 my-2 d-flex justify-content-end">
-                <form  action="#" method="POST" class="form" style="position: initial;">
-                    {% csrf_token %}
-                    <input class="mr-sm-3" type="search" placeholder="Search" aria-label="Search" style="border-radius: 5px; height: 2.1em;">
-                    <button class="btn btn-outline-none my-2 my-sm-0" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                      </svg></button>
-                </form>
+        </nav>
+
+        <!-- Offcanvas menu -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menu</h5>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
             </div>
-
-            {% for message in messages %}
-            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
-                <strong>Message: </strong> {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/management/">Student Management System</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/visualize/post/">Visualize</a>
+                    </li>
+                    <li class="nav-item">
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign Out</a>
+                    </li>
+                </ul>
             </div>
-            {% endfor %}
+        </div>
 
-            {% block body %}
+        <div class="col-md-12 my-2 d-flex justify-content-end">
+            <form action="#" method="POST" class="form" style="position: initial;">
+                {% csrf_token %}
+                <input class="mr-sm-3" type="search" placeholder="Search" aria-label="Search"
+                    style="border-radius: 5px; height: 2.1em;">
+                <button class="btn btn-outline-none my-2 my-sm-0" type="submit"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path
+                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg></button>
+            </form>
+        </div>
 
-            {% endblock %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            <strong>Message: </strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endfor %}
+
+        {% block body %}
+
+        {% endblock %}
 
 
-            <footer class="bd-footer py-4 py-md-1 mt-5 bg-body-tertiary">
-                <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
-                    <div class="row">
-                        <div class="col-lg-3 mb-3">
-                            <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none"
-                                href="/" aria-label="Bootstrap">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="d-block me-2"
-                                    viewBox="0 0 118 94" role="img">
-                                    <title>VYOMIKA</title>
-                                </svg>
-                                <span class="fs-5">VYOMIKA</span>
-                            </a>
-                        </div>
-                        <div class="col-6 col-lg-2 offset-lg-1 mb-3">
-                            <h5>Links</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2"><a href="/">Home</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-6 col-lg-2 mb-3">
-                            <h5>Guides</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2"><a href="/docs/5.3/getting-started/">Getting started</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-6 col-lg-2 mb-3">
-                            <h5>Projects</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2"><a href="https://github.com/twbs/bootstrap">Bootstrap 5</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-6 col-lg-2 mb-3">
-                            <h5>Community</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2"><a href="https://github.com/twbs/bootstrap/issues">Issues</a></li>
-                            </ul>
-                        </div>
+        <footer class="bd-footer py-4 py-md-1 mt-5 bg-body-tertiary">
+            <div class="container py-4 py-md-5 px-4 px-md-3 text-body-secondary">
+                <div class="row">
+                    <div class="col-lg-3 mb-3">
+                        <a class="d-inline-flex align-items-center mb-2 text-body-emphasis text-decoration-none"
+                            href="/" aria-label="Bootstrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="d-block me-2"
+                                viewBox="0 0 118 94" role="img">
+                                <title>VYOMIKA</title>
+                            </svg>
+                            <span class="fs-5">VYOMIKA</span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+                        <h5>Links</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="/">Home</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-lg-2 mb-3">
+                        <h5>Guides</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="/docs/5.3/getting-started/">Getting started</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-lg-2 mb-3">
+                        <h5>Projects</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="https://github.com/twbs/bootstrap">Bootstrap 5</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-lg-2 mb-3">
+                        <h5>Community</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="https://github.com/twbs/bootstrap/issues">Issues</a></li>
+                        </ul>
                     </div>
                 </div>
-            </footer>
+            </div>
+        </footer>
 
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-                crossorigin="anonymous"></script>
-        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    </div>
     </div>
 </body>
 
