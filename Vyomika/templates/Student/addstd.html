@@ -4,7 +4,8 @@
 {% block style %}
 {% endblock %}
 {% block body %}
-<form>
+<form action="#" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
     <div class="col">
         <label for="name">Full Name</label>
         <input type="text" class="form-control" name="stdname" placeholder="Full name">
@@ -17,37 +18,51 @@
     </div>
     <div class="form-group">
         <label for="inputAddress">Address</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        <input type="text" class="form-control" id="inputAddress" name="stdadd" placeholder="1234 Main St">
     </div>
     <div class="form-group">
-        <label for="inputAddress2">Address 2</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        <label for="phone">Phone</label>
+        <input type="text" class="form-control" id="inputAddress2" name="stdphone" placeholder="Phone number">
     </div>
     <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity">
-        </div>
         <div class="form-group col-md-4">
-            <label for="inputState">State</label>
-            <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+            <label for="faculty">Faculty</label>
+            <select id="inputState" class="form-control" name="stdfaculty">
+                <option selected>...</option>
+                <option>BSIT</option>
+                <option>BBA</option>
             </select>
         </div>
-        <div class="form-group col-md-2">
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
-        </div>
     </div>
-    <div class="form-group">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
-                Check me out
-            </label>
+    <fieldset class="form-group m-1">
+        <div class="row">
+            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stdgender" id="gridRadios1" value="Male">
+                    <label class="form-check-label" for="gridRadios1">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stdgender" id="gridRadios2" value="Female">
+                    <label class="form-check-label" for="gridRadios2">
+                        Female
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="stdgender" id="gridRadios3" value="Others">
+                    <label class="form-check-label" for="gridRadios3">
+                        Others
+                    </label>
+                </div>
+            </div>
         </div>
+    </fieldset>
+    <div class="m-3">
+        <label class="form-check-label" for="gridRadios3"> Choose Image </label>
+        <input type="file" name="stdimage" accept="image/*">
     </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="btn btn-primary" >Sign in</button>
 </form>
 {% endblock %}

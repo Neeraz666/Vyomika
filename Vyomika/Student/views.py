@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from django.core.files.storage import default_storage
 from .models import Student
 
 # Create your views here.
@@ -18,16 +19,17 @@ def studentMgmt(request):
 def addStudent(request):
     if request.method == 'POST':
         stdname = request.POST.get('stdname')
-        stdemail = request.POST.get('srdemail')
+        stdemail = request.POST.get('stdemail')
         stdadd = request.POST.get('stdadd')
         stdphone = request.POST.get('stdphone')
         stdfaculty = request.POST.get('stdfaculty')
         stdgender = request.POST.get('stdgender')
+        stdimage = request.FILES.get('stdimage')
 
         student = Student(stdname=stdname, stdemail=stdemail, stdadd=stdadd,
-                          stdphone=stdphone, stdfaculty=stdfaculty, stdgender=stdgender)
+                          stdphone=stdphone, stdfaculty=stdfaculty, stdgender=stdgender, stdimage =stdimage)
         
         student.save()
-        stdData = {'stdname':stdname, 'stdemail':stdemail, 'stdadd':stdadd, 'stdphone':stdphone, 'stdfaculty':stdfaculty, 'stdgender':stdgender}
+        # stdData = {'stdname':stdname, 'stdemail':stdemail, 'stdadd':stdadd, 'stdphone':stdphone, 'stdfaculty':stdfaculty, 'stdgender':stdgender}
 
     return render(request, 'Student/addstd.html')
