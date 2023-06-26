@@ -6,6 +6,6 @@ from . import views
 urlpatterns = [
     path('post/', views.createGraph, name='dataInput'),
     path('display/<int:snum>/', views.displayGraph, name='displayGraph')
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
