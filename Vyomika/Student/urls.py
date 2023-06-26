@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.management, name='management'),
     path('faculty/', views.faculty, name='faculty'),
-    path('faculty/student/', views.studentMgmt, name = 'student'),
-    path('faculty/student/addStudent/', views.addStudent, name = 'addStudent')
+    path('faculty/bsitstudents/', views.bsit, name = 'bsitstudent'),
+    path('faculty/bbastudents/', views.bba, name = 'bbastudent'),
+    path('faculty/<str:stdfaculty>/addStudent/', views.addStudent, name = 'addStudent')
 ]

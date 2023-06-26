@@ -12,11 +12,7 @@ def management(request):
 def faculty(request):
     return render(request, 'Student/class.html')
 
-
-def studentMgmt(request):
-    return render(request, 'Student/stdmgmt.html')
-
-def addStudent(request):
+def addStudent(request, stdfaculty):
     if request.method == 'POST':
         stdname = request.POST.get('stdname')
         stdemail = request.POST.get('stdemail')
@@ -31,6 +27,18 @@ def addStudent(request):
         
         student.save()
         # stdData = {'stdname':stdname, 'stdemail':stdemail, 'stdadd':stdadd, 'stdphone':stdphone, 'stdfaculty':stdfaculty, 'stdgender':stdgender}
-        return redirect('/management/faculty/student/')
+        if stdfaculty == 'BSIT':
+            return redirect('/management/faculty/bsitstudents/')
+        elif stdfaculty == 'BBA':
+            return redirect('/management/faculty/bbastudents/')
 
     return render(request, 'Student/addstd.html')
+
+def bsit(request):
+    student = Student.objects.filter(stdfaculty='BSIT')
+    return render(request, 'Student/bsitstudents.html', {'student':student})
+
+def bba(request):
+    student = Student.objects.filter(stdfaculty='BBA')
+    return render(request, 'Student/bbastudents.html')
+    # return render(request, 'Student/bbastudents.html')
