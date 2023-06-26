@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.core.files.storage import default_storage
 from .models import Student
 
@@ -40,5 +40,13 @@ def bsit(request):
 
 def bba(request):
     student = Student.objects.filter(stdfaculty='BBA')
-    return render(request, 'Student/bbastudents.html')
-    # return render(request, 'Student/bbastudents.html')
+    return render(request, 'Student/bbastudents.html', {'student':student})
+
+def delete_student(request, std_id):
+    student = get_object_or_404(Student, std_id=std_id)
+    student.delete()
+
+    if student.stdfaculty == 'BSIT':
+        return redirect('/management/faculty/bsitstudents/')
+    elif student.stdfaculty == 'BBA':
+        return redirect('/management/faculty/bbastudents/')

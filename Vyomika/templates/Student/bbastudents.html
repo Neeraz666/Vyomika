@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} Vyomika {% endblock title %}
+{% block body %}
+<a href="addStudent/"><button type="button" class="btn btn-outline-dark m-3">Add Students</button></a>
+
+<table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Faculty</th>
+            <th>Gender</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for std in student %}
+        <tr>
+            <td>
+                <div class="d-flex align-items-center">
+                    <img src="/media/{{std.stdimage}}" alt="" style="width: 120px; height: 120px"
+                        class="rounded-circle" />
+                    <div class="ms-3">
+                        <p class="fw-bold mb-1">{{std.stdname}}</p>
+                        <p class="text-muted mb-0">{{std.stdemail}}</p>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{std.stdadd}}</p>
+            </td>
+            <td>{{std.stdphone}}</td>
+            <td>{{std.stdfaculty}}</td>
+            <td>{{std.stdgender}}</td>
+            <td>
+                <form action="{% url 'delete_student' std.std_id %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
