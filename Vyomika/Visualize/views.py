@@ -13,6 +13,7 @@ def createGraph(request):
         fname = request.POST.get('name')
         datas = request.POST.get('data')
         names = request.POST.get('names')
+        file = request.FILES.get('fileUp')
 
         marks = datas.split(',')
         data_list = []
@@ -32,7 +33,7 @@ def createGraph(request):
         plt.savefig(image_buffer, format='png')
         image_buffer.seek(0)
 
-        visualize = Visualize(fname=fname, datas=datas, names=names)
+        visualize = Visualize(fname=fname, datas=datas, names=names, file=file)
         visualize.save()
 
         filename = f'graph{visualize.snum}.png'
