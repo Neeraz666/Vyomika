@@ -13,3 +13,5 @@ class Student(models.Model):
 
     def __str__(self):
         return self.stdname+' Id: '+str(self.std_id)
+    
+    
