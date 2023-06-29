@@ -53,3 +53,24 @@ def delete_student(request, std_id):
 
 def staff(request):
     return render(request, 'Student/staffmgmt.html')
+
+def addStaff(request, stdfaculty):
+    if request.method == 'POST':
+        stfname = request.POST.get('stfname')
+        stfemail = request.POST.get('stfemail')
+        stfadd = request.POST.get('stfadd')
+        stfphone = request.POST.get('stfphone')
+        stfrole = request.POST.get('stfrole')
+        stfgender = request.POST.get('stfgender')
+        stfimage = request.FILES.get('stfimage')
+
+        student = Student(stfname=stfname, stfemail=stfemail, stfadd=stfadd,
+                          stfphone=stfphone, stfrole=stfrole, stfgender=stfgender, stfimage =stfimage)
+        student.save()
+        # stdData = {'stdname':stdname, 'stdemail':stdemail, 'stdadd':stdadd, 'stdphone':stdphone, 'stdfaculty':stdfaculty, 'stdgender':stdgender}
+        if stdfaculty == 'BSIT':
+            return redirect('/management/faculty/bsitstudents/')
+        elif stdfaculty == 'BBA':
+            return redirect('/management/faculty/bbastudents/')
+
+    return render(request, 'Student/addstd.html')
