@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.core.files.storage import default_storage
-from .models import Student
+from .models import Student, Staff
 
 # Create your views here.
 
@@ -54,7 +54,7 @@ def delete_student(request, std_id):
 def staff(request):
     return render(request, 'Student/staffmgmt.html')
 
-def addStaff(request, stdfaculty):
+def addStaff(request):
     if request.method == 'POST':
         stfname = request.POST.get('stfname')
         stfemail = request.POST.get('stfemail')
@@ -64,13 +64,8 @@ def addStaff(request, stdfaculty):
         stfgender = request.POST.get('stfgender')
         stfimage = request.FILES.get('stfimage')
 
-        student = Student(stfname=stfname, stfemail=stfemail, stfadd=stfadd,
+        staff = Staff(stfname=stfname, stfemail=stfemail, stfadd=stfadd,
                           stfphone=stfphone, stfrole=stfrole, stfgender=stfgender, stfimage =stfimage)
-        student.save()
-        # stdData = {'stdname':stdname, 'stdemail':stdemail, 'stdadd':stdadd, 'stdphone':stdphone, 'stdfaculty':stdfaculty, 'stdgender':stdgender}
-        if stdfaculty == 'BSIT':
-            return redirect('/management/faculty/bsitstudents/')
-        elif stdfaculty == 'BBA':
-            return redirect('/management/faculty/bbastudents/')
+        staff.save()
 
-    return render(request, 'Student/addstd.html')
+    return render(request, 'Student/addstaff.html')
