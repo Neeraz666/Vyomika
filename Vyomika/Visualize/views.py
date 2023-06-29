@@ -48,4 +48,3 @@ def displayGraph(request, snum):
     url = f'/media/graph{snum}.png'
     context = {'data': data, 'url':url}
     return render(request, 'Visualize/visualize.html', context)
-

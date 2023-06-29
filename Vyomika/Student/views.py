@@ -50,4 +50,6 @@ def delete_student(request, std_id):
         return redirect('/management/faculty/bsitstudents/')
     elif student.stdfaculty == 'BBA':
         return redirect('/management/faculty/bbastudents/')
-    
+
+def staff(request):
+    return render(request, 'Student/staffmgmt.html')
