@@ -42,17 +42,9 @@ def bba(request):
     student = Student.objects.filter(stdfaculty='BBA')
     return render(request, 'Student/bbastudents.html', {'student':student})
 
-def delete_student(request, std_id):
-    student = get_object_or_404(Student, std_id=std_id)
-    student.delete()
-
-    if student.stdfaculty == 'BSIT':
-        return redirect('/management/faculty/bsitstudents/')
-    elif student.stdfaculty == 'BBA':
-        return redirect('/management/faculty/bbastudents/')
-
 def staff(request):
-    return render(request, 'Student/staffmgmt.html')
+    staff = Staff.objects.all()
+    return render(request, 'Student/staffmgmt.html', {'staff':staff})
 
 def addStaff(request):
     if request.method == 'POST':
@@ -68,4 +60,22 @@ def addStaff(request):
                           stfphone=stfphone, stfrole=stfrole, stfgender=stfgender, stfimage =stfimage)
         staff.save()
 
+        return redirect('/management/staff/')
+
+
     return render(request, 'Student/addstaff.html')
+
+def delete_staff(request, stf_id):
+    staff = get_object_or_404(Staff, stf_id=stf_id)
+    staff.delete()
+
+    return redirect('/management/staff/')
+
+def delete_student(request, std_id):
+    student = get_object_or_404(Student, std_id=std_id)
+    student.delete()
+
+    if student.stdfaculty == 'BSIT':
+        return redirect('/management/faculty/bsitstudents/')
+    elif student.stdfaculty == 'BBA':
+        return redirect('/management/faculty/bbastudents/')

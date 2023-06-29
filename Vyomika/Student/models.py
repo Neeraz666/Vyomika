@@ -25,6 +25,6 @@ class Staff(models.Model):
     stfimage = models.ImageField(default='', upload_to='stdimg')
 
     def __str__(self):
-        return self.stdname+' Id: '+str(self.std_id)
+        return self.stfname+' Id: '+str(self.stf_id)
     
     
