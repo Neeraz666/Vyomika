@@ -2,10 +2,12 @@
 
 {% block title %} Vyomika {% endblock title %}
 {% block body %}
+
+
+{% block search %}
 <div class="col-md-12 my-2 d-flex justify-content-end">
-    <form action="#" method="POST" class="form" style="position: initial;">
-        {% csrf_token %}
-        <input class="mr-sm-3" type="search" placeholder="Search" aria-label="Search"
+    <form action="search/" method="get" class="form" style="position: initial;">
+        <input class="mr-sm-3" type="search" placeholder="Search" name='query' id="query" aria-label="Search"
             style="border-radius: 5px; height: 2.1em;">
         <button class="btn btn-outline-none my-2 my-sm-0" id="search_button_base" type="submit"><svg
                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
@@ -15,6 +17,7 @@
             </svg></button>
     </form>
 </div>
+{% endblock %}
 
 <a href="addStudent/"><button type="button" class="btn btn-outline-dark m-3">Add Students</button></a>
 

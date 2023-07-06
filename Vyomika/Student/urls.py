@@ -13,5 +13,6 @@ urlpatterns = [
     path('delete-staff/<int:stf_id>/', delete_staff , name='delete_staff'),
     path('faculty/bbastudents/', views.bba, name = 'bbastudent'),
     path('faculty/<str:stdfaculty>/addStudent/', views.addStudent, name = 'addStudent'),
+    path('faculty/<str:stdfaculty>/search/', views.searchStd, name = 'searchStd'),
     path('delete-student/<int:std_id>/', delete_student, name='delete_student'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

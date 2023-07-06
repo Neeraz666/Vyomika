@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.core.files.storage import default_storage
 from .models import Student, Staff
+from django.contrib import messages
 
 # Create your views here.
 
@@ -79,3 +80,23 @@ def delete_student(request, std_id):
         return redirect('/management/faculty/bsitstudents/')
     elif student.stdfaculty == 'BBA':
         return redirect('/management/faculty/bbastudents/')
+    
+
+def searchStd(request, stdfaculty):
+    stdfaculty = Student.objects.filter(stdfaculty=stdfaculty)
+    query = request.GET.get('query', '')    
+
+
+    if len(query)>78:
+        allStd = Student.objects.none()
+    else:
+        allName = Student.objects.filter(stdname__icontains=query)
+        allEmail = Student.objects.filter(stdemail__icontains=query)
+        allAdd = Student.objects.filter(stdadd__icontains=query)
+        allStd = allName.union(allEmail, allAdd)
+
+    if allStd.count() == 0:
+        messages.warning(request, "No search results found. Please check your query.")
+         
+    params = {"allStd": allStd, 'query':query}
+    return render(request, 'Student/search.html', params)
