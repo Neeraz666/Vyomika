@@ -9,40 +9,39 @@
             <th>Name</th>
             <th>Address</th>
             <th>Phone</th>
-            <th>Faculty</th>
+            <th>Role</th>
             <th>Gender</th>
         </tr>
     </thead>
     <tbody>
-        {% for std in allStd %}
+        {% for stf in allStf %}
         <tr>
             <td>
                 <div class="d-flex align-items-center">
-                    <img src="/media/{{std.stdimage}}" alt="" style="width: 120px; height: 120px"
+                    <img src="/media/{{stf.stfimage}}" alt="" style="width: 120px; height: 120px"
                         class="rounded-circle" />
                     <div class="ms-3">
-                        <p class="fw-bold mb-1">{{std.stdname}}</p>
-                        <p class="text-muted mb-0">{{std.stdemail}}</p>
+                        <p class="fw-bold mb-1">{{stf.stfname}}</p>
+                        <p class="text-muted mb-0">{{stf.stfemail}}</p>
                     </div>
                 </div>
             </td>
             <td>
-                <p class="fw-normal mb-1">{{std.stdadd}}</p>
+                <p class="fw-normal mb-1">{{stf.stfadd}}</p>
             </td>
-            <td>{{std.stdphone}}</td>
-            <td>{{std.stdfaculty}}</td>
-            <td>{{std.stdgender}}</td>
+            <td>{{stf.stfphone}}</td>
+            <td>{{stf.stfrole}}</td>
+            <td>{{stf.stfgender}}</td>
             <td>
-                <form action="{% url 'delete_student' std.std_id %}" method="POST">
+                <form action="{% url 'delete_staff' stf.stf_id %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>
         {% endfor %}
+
     </tbody>
 </table>
-
-<a href='/management/faculty/<str:stdfaculty/>'><button class="m-3 btn btn-info">Go Back</button></a>
-
+<a href='/management/staff/'><button class="m-3 btn btn-info">Go Back</button></a>
 {% endblock %}

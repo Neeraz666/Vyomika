@@ -100,3 +100,21 @@ def searchStd(request, stdfaculty):
          
     params = {"allStd": allStd, 'query':query}
     return render(request, 'Student/search.html', params)
+
+def searchStf(request):
+    query = request.GET.get('query', '')    
+
+
+    if len(query)>78:
+        allStf = Staff.objects.none()
+    else:
+        stfName = Staff.objects.filter(stfname__icontains=query)
+        stfEmail = Staff.objects.filter(stfemail__icontains=query)
+        stfAdd = Staff.objects.filter(stfadd__icontains=query)
+        allStf = stfName.union(stfEmail, stfAdd)
+
+    if allStf.count() == 0:
+        messages.warning(request, "No search results d. Please check your query.")
+         
+    params = {"allStf": allStf, 'query':query}
+    return render(request, 'Student/searchStf.html', params)
