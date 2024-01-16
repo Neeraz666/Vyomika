@@ -38,10 +38,32 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
-class UserAccount(models.Model):
+class UserAccount(AbstractBaseUser, PermissionsMixin):
+    MALE = "m"
+    FEMALE = "f"
+    OTHER = "o"
+
+    GENDER_CHOICES = (
+        (MALE, "Male"),
+        (FEMALE, "Female"),
+        (OTHER, "other"),
+    )
+
     user_id = models.AutoField(primary_key=True)
     email = models.EmailField(max_length=255, unique = True)
     username = models.CharField(max_length=255)
+    first_name = models.CharField(max_length = 55)
+    last_name = models.CharField(max_length = 55)
+    profile_pic = models.ImageField(upload_to="static/users", blank=True, null=True)
+    phone = models.CharField(max_length=10, unique=True, blank=True, null=True)
+    address = models.CharField(max_length=100, blank=True, null=True)
+    gender = models.CharField(
+        max_length=1,
+        choices=GENDER_CHOICES,
+    )
+    dob = models.DateField(blank=True, null=True)
+
+
     is_active = models.BooleanField(default = True)
     is_staff = models.BooleanField(default = False)
 
