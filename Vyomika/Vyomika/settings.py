@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Home.apps.HomeConfig',
     'Visualize.apps.VisualizeConfig',
     'Student.apps.StudentConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
