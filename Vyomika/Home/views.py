@@ -24,3 +24,6 @@ def contactUs(request):
             messages.success(request, "Your message has been successfully sent")
 
     return render(request, 'Home/contact.html')
+
+def handleSignup(request):
+    pass

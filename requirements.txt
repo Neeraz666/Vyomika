@@ -1,4 +1,5 @@
-django==4.2.3
+django
+djangorestframework
 pillow
 matplotlib
 pandas

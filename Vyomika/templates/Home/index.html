@@ -5,111 +5,163 @@
 {% block style %}
 /* Start Global Rules */
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
 body {
-  font-family: 'Open Sans', sans-serif;
+font-family: 'Open Sans', sans-serif;
 }
 a {
-  text-decoration: none;
+text-decoration: none;
 }
 ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+list-style: none;
+padding: 0;
+margin: 0;
 }
 .container {
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-left: auto;
-  margin-right: auto;
+padding-left: 15px;
+padding-right: 15px;
+margin-left: auto;
+margin-right: auto;
 }
 /* Small */
 @media (min-width: 768px) {
-  .container {
-    width: 750px;
-  }
+.container {
+width: 750px;
+}
 }
 /* Medium */
 @media (min-width: 992px) {
-  .container {
-    width: 970px;
-  }
+.container {
+width: 970px;
+}
 }
 /* Large */
 @media (min-width: 1200px) {
-  .container {
-    width: 1170px;
-  }
+.container {
+width: 1170px;
+}
 }
 /* End Global Rules */
 
 /* Start Landing Page */
 .landing-page .content .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 140px;
-  min-height: calc(100vh - 80px);
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 140px;
+min-height: calc(100vh - 80px);
 }
 @media (max-width: 767px) {
-  .landing-page .content .container {
-    gap: 0;
-    min-height: calc(100vh - 101px);
-    justify-content: center;
-    flex-direction: column-reverse;
-  }
+.landing-page .content .container {
+gap: 0;
+min-height: calc(100vh - 101px);
+justify-content: center;
+flex-direction: column-reverse;
+}
 }
 @media (max-width: 767px) {
-  .landing-page .content .info {
-    text-align: center;
-    margin-bottom: 15px 
-  }
+.landing-page .content .info {
+text-align: center;
+margin-bottom: 15px
+}
 }
 .landing-page .content .info h1 {
-  color: #5d5d5d;
-  font-size: 44px;
+color: #5d5d5d;
+font-size: 44px;
 }
 .landing-page .content .info p {
-  margin: 0;
-  line-height: 1.6;
-  font-size: 15px;
-  color: #5d5d5d;
+margin: 0;
+line-height: 1.6;
+font-size: 15px;
+color: #5d5d5d;
 }
 .landing-page .content .info button {
-  border: 0;
-  border-radius: 20px;
-  padding: 12px 30px;
-  margin-top: 30px;
-  cursor: pointer;
-  color: #FFF;
-  background-color: #6c63ff;
+border: 0;
+border-radius: 20px;
+padding: 12px 30px;
+margin-top: 30px;
+cursor: pointer;
+color: #FFF;
+background-color: #6c63ff;
 }
 .landing-page .content .image img {
-  max-width: 100%;
+max-width: 100%;
 }
 /* End Landing Page */
 
 {% endblock %}
 {% block body %}
 {% load static %}
-      <!-- Start Landing Page -->
-      <div class="landing-page">
-        <div class="content">
-          <div class="container">
-            <div class="info col-md-5">
-              <h1>Vyomika: Where Data Soars to New Heights</h1>
-              <p>At Vyomika, we believe that data holds immense potential and is the key to unlocking valuable insights and driving transformative change. Our name reflects our commitment to harnessing the power of data and propelling it to new heights, enabling businesses, organizations, and governments to navigate uncharted territories with confidence.
-                <br>
-                <a href="about/"> Learn More</a>...
-              </p>
-              <button>Get Started</button>
-            </div>
-            <div class="image">
-              <img src="{% static 'logo1.png' %}" alt='Logo' style="height:fit-content;">
+<!-- Start Landing Page -->
+<div class="landing-page">
+  <div class="content">
+    <div class="container">
+      <div class="info col-md-5">
+        <h1>Vyomika: Where Data Soars to New Heights</h1>
+        <p>At Vyomika, we believe that data holds immense potential and is the key to unlocking valuable insights and
+          driving transformative change. Our name reflects our commitment to harnessing the power of data and propelling
+          it to new heights, enabling businesses, organizations, and governments to navigate uncharted territories with
+          confidence.
+          <br>
+          <a href="about/"> Learn More</a>...
+        </p>
+        <!-- Button trigger modal -->
+
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Get
+          Started</button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Welcome to Vyomika</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action='#' method='POST'> {% csrf_token %}
+                  <h1 class="title text-center mb-4">Sign Up</h1>
+                  <div class="form-group position-relative my-2">
+                    <label for="formName" class="d-block">
+                      <i class="icon" data-feather="user"></i>
+                    </label>
+                    <input type="text" id="formName" class="form-control form-control-lg thick" id="name" name="name"
+                      placeholder="User Name" required>
+                  </div>
+
+                  <!-- E-mail -->
+                  <div class="form-group position-relative my-2">
+                    <label for="formEmail" class="d-block">
+                      <i class="icon" data-feather="mail"></i>
+                    </label>
+                    <input type="email" id="formEmail" class="form-control form-control-lg thick" id="email"
+                      name="email" placeholder="E-mail" required>
+                  </div>
+                  <div class="form-group position-relative my-2">
+                    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password"
+                      required>
+                  </div>
+                  <div class="form-group position-relative my-2">
+                    <input type="password" class="form-control" id="pass2" name="pass2"
+                      placeholder="Enter your password again" required>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary">Submit</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- End Landing Page -->
+      <div class="image">
+        <img src="{% static 'logo1.png' %}" alt='Logo' style="height:fit-content;">
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Landing Page -->
 {% endblock %}
