@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
 
-<head>
-  <title>Login</title>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f4f4f4;
-    }
+{% block title %} Login {% endblock title %}
+{% block style %}
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+  }
 
     .form-container {
       max-width: 300px;
@@ -18,12 +17,12 @@
       border-radius: 5px;
       text-align: center;
     }
-
+    
     h2 {
       font-size: 24px;
       margin-bottom: 20px;
     }
-
+    
     label {
       display: block;
       margin: 10px 0;
@@ -40,7 +39,7 @@
       border-radius: 10px;
       font-size: 20px;
     }
-
+    
     button {
       width: 100%;
       padding: 10px;
@@ -51,13 +50,15 @@
       font-size: 16px;
       cursor: pointer;
     }
-
+    
     button:hover {
       background-color: #0056b3;
     }
   </style>
+{% endblock %}
 </head>
 
+{% block body %}
 <body>
   <div class="form-container">
     <h2>Login</h2>
@@ -69,8 +70,9 @@
       <input type="password" id="password" name="password" required>
       <button type="submit" style='margin-bottom:1em'>Login</button>
     </form>
-    <a href="{% url 'signup'%}"><button type="submit">Signup</button></a>
+    <a href="signup"><button type="submit">Signup</button></a>
   </div>
 </body>
+{% endblock %}
 
 </html>

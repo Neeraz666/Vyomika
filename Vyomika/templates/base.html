@@ -25,12 +25,6 @@
             transform: translateY(-0.15em);
         }
 
-        /* Style for the modal body */
-        .modal-body {
-            text-align: center;
-            padding: 20px;
-        }
-
         /* Style for the form */
         form {
             max-width: 300px;
@@ -81,12 +75,6 @@
             margin-right: 10px;
             cursor: pointer;
             border-radius: 4px;
-        }
-
-        /* Style for the modal footer buttons */
-        .modal-footer {
-            text-align: center;
-            margin-top: 20px;
         }
 
         .btn-secondary {
@@ -154,43 +142,7 @@
                     </ul>
                 </div>
                 <div class="d-grid gap-2" style="float: right;">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop">Login</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Welcome to Vyomika</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <h3>Login Here</h3>
-
-                                        <label for="username">Username</label>
-                                        <input type="text" placeholder="Email or Phone" id="username">
-
-                                        <label for="password">Password</label>
-                                        <input type="password" placeholder="Password" id="password">
-
-                                        
-                                        <div class="social">
-                                            <div class="go"><i class="fab fa-google"></i> Google</div>
-                                            <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary"
-                                        data-bs-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary">Login</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <a href = '/login'><button type="button" class="btn btn-primary">Login</button></a>
                 </div>
             </div>
         </nav>

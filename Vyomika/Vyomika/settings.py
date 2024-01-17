@@ -55,6 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Vyomika.urls'
+AUTH_USER_MODEL = 'accounts.UserAccount'
 
 TEMPLATES = [
     {
