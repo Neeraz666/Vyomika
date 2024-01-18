@@ -108,8 +108,10 @@ max-width: 100%;
         </p>
         <!-- Button trigger modal -->
 
-        <a href = "/login/signup"><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Get
-          Started</button></a>
+        {% if not user.is_authenticated %}
+        <a href="/login/signup"><button type="button" class="btn btn-secondary">Get
+            Started</button></a>
+        {% endif %}
       </div>
       <div class="image">
         <img src="{% static 'logo1.png' %}" alt='Logo' style="height:fit-content;">
