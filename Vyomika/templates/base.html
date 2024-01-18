@@ -141,9 +141,16 @@
                         </li>
                     </ul>
                 </div>
+                {% if not user.is_authenticated %}
                 <div class="d-grid gap-2" style="float: right;">
                     <a href = '/login'><button type="button" class="btn btn-primary">Login</button></a>
                 </div>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <div class="d-grid gap-2" style="float: right;">
+                    <a href = '/login/handlelogout'><button type="button" class="btn btn-primary">Logout</button></a>
+                </div>
+                {% endif %}
             </div>
         </nav>
 
@@ -166,7 +173,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sign Out</a>
+                        <a class="nav-link" href="/login/handlelogout">Sign Out</a>
                     </li>
                 </ul>
             </div>

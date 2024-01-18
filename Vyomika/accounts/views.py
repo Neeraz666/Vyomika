@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .models import *
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate,logout
+from django.contrib.auth import login as auth_login
 from django.contrib.auth.hashers import make_password
 
 # Create your views here.
@@ -40,5 +41,24 @@ def signup(request):
             messages.error(request, 'Passwords do not match!. please try again!')
             return redirect('/login/signup')
         
-def login(reqest):
-    return HttpResponse("Login page")
+def login(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = authenticate(request, email=email, password=password)
+
+        if user:
+            auth_login(request, user)
+            messages.success(request,f"Hello {user.get_username()}, Welcome to Vyomika")
+            return redirect("/")
+        else:
+            messages.error(request,"Invalid Username or password.")
+
+    else:
+        return HttpResponse("This view only accepts POST requests.")
+    
+
+def handlelogout(request):
+    logout(request)
+    messages.success(request,"Logged out successfully.")
+    return redirect("/")

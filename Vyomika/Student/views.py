@@ -2,17 +2,19 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.core.files.storage import default_storage
 from .models import Student, Staff
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required
 def management(request):
     return render(request, 'Student/home.html')
 
-
+@login_required
 def faculty(request):
     return render(request, 'Student/class.html')
 
+@login_required
 def addStudent(request, stdfaculty):
     if request.method == 'POST':
         stdname = request.POST.get('stdname')
@@ -35,18 +37,22 @@ def addStudent(request, stdfaculty):
 
     return render(request, 'Student/addstd.html')
 
+@login_required
 def bsit(request):
     student = Student.objects.filter(stdfaculty='BSIT')
     return render(request, 'Student/bsitstudents.html', {'student':student})
 
+@login_required
 def bba(request):
     student = Student.objects.filter(stdfaculty='BBA')
     return render(request, 'Student/bbastudents.html', {'student':student})
 
+@login_required
 def staff(request):
     staff = Staff.objects.all()
     return render(request, 'Student/staffmgmt.html', {'staff':staff})
 
+@login_required
 def addStaff(request):
     if request.method == 'POST':
         stfname = request.POST.get('stfname')
@@ -66,12 +72,14 @@ def addStaff(request):
 
     return render(request, 'Student/addstaff.html')
 
+@login_required
 def delete_staff(request, stf_id):
     staff = get_object_or_404(Staff, stf_id=stf_id)
     staff.delete()
 
     return redirect('/management/staff/')
 
+@login_required
 def delete_student(request, std_id):
     student = get_object_or_404(Student, std_id=std_id)
     student.delete()
@@ -81,7 +89,7 @@ def delete_student(request, std_id):
     elif student.stdfaculty == 'BBA':
         return redirect('/management/faculty/bbastudents/')
     
-
+@login_required
 def searchStd(request, stdfaculty):
     stdfaculty = Student.objects.filter(stdfaculty=stdfaculty)
     query = request.GET.get('query', '')    
@@ -101,6 +109,7 @@ def searchStd(request, stdfaculty):
     params = {"allStd": allStd, 'query':query}
     return render(request, 'Student/search.html', params)
 
+@login_required
 def searchStf(request):
     query = request.GET.get('query', '')    
 

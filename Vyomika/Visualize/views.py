@@ -5,9 +5,11 @@ matplotlib.use('Agg')
 import seaborn as sns
 import matplotlib.pyplot as plt
 from .models import Visualize
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def createGraph(request):
     if request.method == 'POST':
         fname = request.POST.get('name')
@@ -43,6 +45,7 @@ def createGraph(request):
 
     return render(request, 'Visualize/data.html')
 
+@login_required
 def displayGraph(request, snum):
     data = Visualize.objects.filter(snum=snum).first()
     url = f'/media/graph{snum}.png'

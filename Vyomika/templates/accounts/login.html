@@ -62,7 +62,7 @@
 <body>
   <div class="form-container">
     <h2>Login</h2>
-    <form action="/handlelogin" method="POST">
+    <form action="handlelogin" method="POST">
       {% csrf_token %}
       <label for="email">Email:</label>
       <input type="text" id="email" name="email" required>

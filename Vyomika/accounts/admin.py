@@ -7,5 +7,6 @@ class UserAccountAdmin(admin.ModelAdmin):
     list_display_links = ('user_id',)
     search_fields = ('user_id', 'email')
     list_per_page = 25
+    readonly_fields = ('password',)
 
 admin.site.register(UserAccount, UserAccountAdmin)
