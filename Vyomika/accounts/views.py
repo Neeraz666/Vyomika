@@ -53,6 +53,7 @@ def login(request):
             return redirect("/")
         else:
             messages.error(request,"Invalid Username or password.")
+            return redirect("/login")
 
     else:
         return HttpResponse("This view only accepts POST requests.")
@@ -61,4 +62,5 @@ def login(request):
 def handlelogout(request):
     logout(request)
     messages.success(request,"Logged out successfully.")
+
     return redirect("/")

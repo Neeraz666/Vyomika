@@ -25,6 +25,10 @@
             transform: translateY(-0.15em);
         }
 
+        .usrname{
+            padding: 2em;
+        }
+
         /* Style for the form */
         form {
             max-width: 300px;
@@ -147,6 +151,11 @@
                 </div>
                 {% endif %}
                 {% if user.is_authenticated %}
+                <div class="usrname">
+                    <p>
+                        {{ user.username }}
+                    </p>
+                </div>
                 <div class="d-grid gap-2" style="float: right;">
                     <a href = '/login/handlelogout'><button type="button" class="btn btn-primary">Logout</button></a>
                 </div>
