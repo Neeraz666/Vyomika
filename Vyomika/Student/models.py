@@ -4,6 +4,7 @@ from accounts.models import UserAccount
 # Create your models here.
 class Student(models.Model):
     std_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(UserAccount, on_delete=models.CASCADE, default=None, null=True, blank=True)
     stdname = models.CharField(default='', max_length=55)
     stdemail = models.CharField(default='', max_length=100)
     stdadd = models.CharField(default='', max_length=255)
@@ -17,13 +18,14 @@ class Student(models.Model):
     
 class Staff(models.Model):
     stf_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(UserAccount, on_delete = models.CASCADE, default=None, null=True, blank=True)
     stfname = models.CharField(default='', max_length=55)
     stfemail = models.CharField(default='', max_length=100)
     stfadd = models.CharField(default='', max_length=255)
     stfphone = models.CharField(default='', max_length=10)
     stfrole = models.CharField(default='', max_length=55)
     stfgender = models.CharField(default='', max_length=6)
-    stfimage = models.ImageField(default='', upload_to='stdimg')
+    stfimage = models.ImageField(default='', upload_to='stdimg') # Need to change stdimg to stfimg and make migrations
 
     def __str__(self):
         return self.stfname+' Id: '+str(self.stf_id)

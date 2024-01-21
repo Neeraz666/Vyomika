@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+
 @login_required
 def management(request):
     return render(request, 'Student/home.html')
@@ -24,8 +25,10 @@ def addStudent(request, stdfaculty):
         stdfaculty = request.POST.get('stdfaculty')
         stdgender = request.POST.get('stdgender')
         stdimage = request.FILES.get('stdimage')
+        
+        currentuser = request.user
 
-        student = Student(stdname=stdname, stdemail=stdemail, stdadd=stdadd,
+        student = Student(stdname=stdname, user=currentuser ,stdemail=stdemail, stdadd=stdadd,
                           stdphone=stdphone, stdfaculty=stdfaculty, stdgender=stdgender, stdimage =stdimage)
         
         student.save()
@@ -39,17 +42,20 @@ def addStudent(request, stdfaculty):
 
 @login_required
 def bsit(request):
-    student = Student.objects.filter(stdfaculty='BSIT')
+    currentuser = request.user
+    student = Student.objects.filter(stdfaculty='BSIT', user=currentuser)
     return render(request, 'Student/bsitstudents.html', {'student':student})
 
 @login_required
 def bba(request):
-    student = Student.objects.filter(stdfaculty='BBA')
+    currentuser = request.user
+    student = Student.objects.filter(stdfaculty='BBA', user = currentuser)
     return render(request, 'Student/bbastudents.html', {'student':student})
 
 @login_required
 def staff(request):
-    staff = Staff.objects.all()
+    currentuser = request.user
+    staff = Staff.objects.filter(user=currentuser)
     return render(request, 'Student/staffmgmt.html', {'staff':staff})
 
 @login_required
@@ -63,7 +69,9 @@ def addStaff(request):
         stfgender = request.POST.get('stfgender')
         stfimage = request.FILES.get('stfimage')
 
-        staff = Staff(stfname=stfname, stfemail=stfemail, stfadd=stfadd,
+        currentuser = request.user
+
+        staff = Staff(stfname=stfname, user=currentuser,stfemail=stfemail, stfadd=stfadd,
                           stfphone=stfphone, stfrole=stfrole, stfgender=stfgender, stfimage =stfimage)
         staff.save()
 

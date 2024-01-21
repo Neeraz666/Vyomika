@@ -15,7 +15,6 @@ def createGraph(request):
         fname = request.POST.get('name')
         datas = request.POST.get('data')
         names = request.POST.get('names')
-        file = request.FILES.get('fileUp')
 
         marks = datas.split(',')
         data_list = []
@@ -35,7 +34,9 @@ def createGraph(request):
         plt.savefig(image_buffer, format='png')
         image_buffer.seek(0)
 
-        visualize = Visualize(fname=fname, datas=datas, names=names, file=file)
+        currentuser = request.user
+
+        visualize = Visualize(fname=fname, user = currentuser ,datas=datas, names=names)
         visualize.save()
 
         filename = f'graph{visualize.snum}.png'
@@ -51,3 +52,18 @@ def displayGraph(request, snum):
     url = f'/media/graph{snum}.png'
     context = {'data': data, 'url':url}
     return render(request, 'Visualize/visualize.html', context)
+
+
+@login_required
+def visualizeFile(request, snum):
+    if request.method == "POST":
+        file = request.FILES.get('fileUp')
+        plottype = request.POST.get('plottype')
+        xlabel = request.POST.get('xlabel')
+        ylabel = request.POST.get('ylabel')
+
+        
+
+        visualize = Visualize(file=file)
+        visualize.save()
+
