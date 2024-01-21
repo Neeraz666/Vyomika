@@ -1,10 +1,11 @@
 from django.shortcuts import render, HttpResponse, redirect
 from io import BytesIO
+import pandas as pd
 import matplotlib
 matplotlib.use('Agg')
 import seaborn as sns
 import matplotlib.pyplot as plt
-from .models import Visualize
+from .models import Visualize, FileVisualize
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -55,15 +56,43 @@ def displayGraph(request, snum):
 
 
 @login_required
-def visualizeFile(request, snum):
+def visualizeFile(request):
+
+    plot_functions = {
+        "scatter": sns.scatterplot,
+        "line": sns.lineplot,
+        "bar": sns.barplot,
+        "histogram": sns.histplot,
+    }
+
     if request.method == "POST":
         file = request.FILES.get('fileUp')
         plottype = request.POST.get('plottype')
         xlabel = request.POST.get('xlabel')
         ylabel = request.POST.get('ylabel')
 
-        
+        df = pd.DataFrame(file)
 
-        visualize = Visualize(file=file)
-        visualize.save()
+        if plottype in plot_functions:
+            plot_functions[plottype](x=xlabel, y=ylabel, data=df)
+            plt.xlabel = xlabel
+            plt.ylabel = ylabel
 
+            image_buffer = BytesIO()
+            plt.savefig(image_buffer, format='png')
+            image_buffer.seek(0)
+
+        currentuser = request.user
+
+        filevisualize = FileVisualize(file=file, user = currentuser)
+        filevisualize.save()
+
+        filename = f'graph{filevisualize.num}.png'
+        filevisualize.graph.save(filename, image_buffer)
+
+@login_required
+def filegraph(request, num):
+    filedata = FileVisualize.objects.filter(num=num).first()
+    url = filedata.graph.url
+
+    return render(request, '', url)
