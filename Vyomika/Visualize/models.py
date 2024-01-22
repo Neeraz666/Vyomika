@@ -17,8 +17,11 @@ class Visualize(models.Model):
 class FileVisualize(models.Model):
     num = models.AutoField(primary_key=True)
     file = models.FileField(default='', upload_to='files')
-    graph = models.ImageField(default='', upload_to='file/graphs')
+    plottype = models.CharField(max_length = 100, default = None)
+    xlabelfile = models.CharField(max_length = 100, default = None)
+    ylabelfile = models.CharField(max_length = 100, default = None)
+    graph = models.ImageField(default='', upload_to='files/graphs')
     user = models.ForeignKey(UserAccount, on_delete=models.CASCADE, default = None, null=True, blank=True)
 
     def __str__(self):
-        return self.user+'s file'
+        return str(self.user)+'s file'

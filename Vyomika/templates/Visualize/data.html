@@ -27,9 +27,9 @@
 
         </form>
 
-        {% if data %}
+        {% comment %} {% if data %}
         <a href="{% url 'displayGraph' data.snum %}" class="btn btn-primary m-2">Visualize</a>
-        {% endif %}
+        {% endif %} {% endcomment %}
 
     </div>
 
@@ -38,11 +38,32 @@
         </h1>
     </div>
 
-    <div class="m-3">
-        <label class="form-check-label" for="fileUp">Choose File</label>
-        <input type="file" name="fileUp"
-            accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-    </div>
+    <form action="/visualize/visualizefile/" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+
+        <div class="m-3">
+            <label class="form-check-label" for="fileupload">Choose File</label>
+            <input type="file" name="fileupload"
+                accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        </div>
+
+        <div class="form-group">
+            <label for="xlabels">Enter the plottype</label>
+            <input type="text" class="form-control" id="plottype" name="plottype" required>
+        </div>
+
+        <div class="form-group">
+            <label for="xlabels">Enter the xlabels</label>
+            <input type="text" class="form-control" id="xlabelfile" name="xlabelfile" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ylabels">Enter the ylabels </label>
+            <input type="text" class="form-control" id="ylabelfile" name="ylabelfile" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary m-2">Submit</button>
+    </form>
 
 
 </div>

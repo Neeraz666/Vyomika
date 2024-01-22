@@ -55,6 +55,11 @@ def displayGraph(request, snum):
     return render(request, 'Visualize/visualize.html', context)
 
 
+
+
+
+
+"""   FOR FILES   """
 @login_required
 def visualizeFile(request):
 
@@ -66,33 +71,49 @@ def visualizeFile(request):
     }
 
     if request.method == "POST":
-        file = request.FILES.get('fileUp')
+        file = request.FILES.get('fileupload')
         plottype = request.POST.get('plottype')
-        xlabel = request.POST.get('xlabel')
-        ylabel = request.POST.get('ylabel')
+        xlabelfile = request.POST.get('xlabelfile')
+        ylabelfile = request.POST.get('ylabelfile')
 
-        df = pd.DataFrame(file)
+        currentuser = request.user
+
+        filevisualize = FileVisualize(file=file, user = currentuser, plottype =plottype ,xlabelfile=xlabelfile, ylabelfile=ylabelfile)
+        filevisualize.save()
+
+        if file:
+            try:
+                # Read the file using pandas read_excel or read_csv, depending on the file type
+                if file.name.endswith('.csv'):
+                    df = pd.read_csv(filevisualize.file)
+                elif file.name.endswith('.xlsx'):
+                     df = pd.read_excel(filevisualize.file.url)
+                else:
+                    # Handle other file types if needed
+                    return HttpResponse("Unsupported file format")
+            except Exception as e:
+                return HttpResponse(f"Error reading file: {str(e)}")
+        else:
+            return HttpResponse("No file provided")
 
         if plottype in plot_functions:
-            plot_functions[plottype](x=xlabel, y=ylabel, data=df)
-            plt.xlabel = xlabel
-            plt.ylabel = ylabel
+            plot_functions[plottype](x=xlabelfile, y=ylabelfile, data=df)
+            plt.xlabel = xlabelfile
+            plt.ylabel = ylabelfile
 
             image_buffer = BytesIO()
             plt.savefig(image_buffer, format='png')
             image_buffer.seek(0)
 
-        currentuser = request.user
-
-        filevisualize = FileVisualize(file=file, user = currentuser)
-        filevisualize.save()
-
         filename = f'graph{filevisualize.num}.png'
         filevisualize.graph.save(filename, image_buffer)
+
+        return redirect("filedisplay", num=FileVisualize.num)
+
+        
+    return render(request, 'Visualize/data.html')
 
 @login_required
 def filegraph(request, num):
     filedata = FileVisualize.objects.filter(num=num).first()
-    url = filedata.graph.url
-
-    return render(request, '', url)
+    return render(request, 'Visualize/fileviz.html', filedata)

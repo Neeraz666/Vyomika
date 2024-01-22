@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Vyomika {% endblock title %}
+{% block body %}
+<div class="container">    
+    <h3>Graph Display</h3>
+    {% if filedata %}
+    <div>
+        <p>Plottype: {{ filedata.plottype }}</p>
+        <p>X-label: {{ filedata.xlabel }}</p>
+        <p>Y-label: {{ filedata.ylabel }}</p>
+    </div>
+    <img src="{{ filedata.graph.url }}" alt="Graph {{ filedata.num }}">
+    {% endif %}
+</div>
+{% endblock %}
+
+
+{% comment %} {{ MEDIA_URL }}graph{{data.snum}}.png {% endcomment %}
