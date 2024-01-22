@@ -63,12 +63,12 @@ def displayGraph(request, snum):
 @login_required
 def visualizeFile(request):
 
-    plot_functions = {
-        "scatter": sns.scatterplot,
-        "line": sns.lineplot,
-        "bar": sns.barplot,
-        "histogram": sns.histplot,
-    }
+    # plot_functions = {
+    #     "scatter": sns.scatterplot,
+    #     "line": sns.lineplot,
+    #     "bar": sns.barplot,
+    #     "histogram": sns.histplot,
+    # }
 
     if request.method == "POST":
         file = request.FILES.get('fileupload')
@@ -81,39 +81,76 @@ def visualizeFile(request):
         filevisualize = FileVisualize(file=file, user = currentuser, plottype =plottype ,xlabelfile=xlabelfile, ylabelfile=ylabelfile)
         filevisualize.save()
 
-        if file:
-            try:
-                # Read the file using pandas read_excel or read_csv, depending on the file type
-                if file.name.endswith('.csv'):
-                    df = pd.read_csv(filevisualize.file)
-                elif file.name.endswith('.xlsx'):
-                     df = pd.read_excel(filevisualize.file.url)
-                else:
-                    # Handle other file types if needed
-                    return HttpResponse("Unsupported file format")
-            except Exception as e:
-                return HttpResponse(f"Error reading file: {str(e)}")
-        else:
-            return HttpResponse("No file provided")
+        # fileurl = 'files/data1.xlsx'
 
-        if plottype in plot_functions:
-            plot_functions[plottype](x=xlabelfile, y=ylabelfile, data=df)
-            plt.xlabel = xlabelfile
-            plt.ylabel = ylabelfile
+        # df = pd.read_excel(fileurl)
 
-            image_buffer = BytesIO()
-            plt.savefig(image_buffer, format='png')
-            image_buffer.seek(0)
 
-        filename = f'graph{filevisualize.num}.png'
-        filevisualize.graph.save(filename, image_buffer)
+        # if file:
+        #     try:
+        #         # Read the file using pandas read_excel or read_csv, depending on the file type
+        #         if file.name.endswith('.csv'):
+        #             df = pd.read_csv(fileurl)
+        #         elif file.name.endswith('.xlsx'):
+        #         else:
+        #             # Handle other file types if needed
+        #             return HttpResponse("Unsupported file format")
+        #     except Exception as e:
+        #         return HttpResponse(f"Error reading file: {str(e)}")
+        # else:
+        #     return HttpResponse("No file provided")
 
-        return redirect("filedisplay", num=FileVisualize.num)
+        # if plottype in plot_functions:
+        #     plot_functions[plottype](x=xlabelfile, y=ylabelfile, data=df)
+        #     plt.xlabel = xlabelfile
+        #     plt.ylabel = ylabelfile
+
+        #     image_buffer = BytesIO()
+        #     plt.savefig(image_buffer, format='png')
+        #     image_buffer.seek(0)
+
+        # filename = f'graph{filevisualize.num}.png'
+        # filevisualize.graph.save(filename, image_buffer)
+
+        return redirect("fileGraph", num=filevisualize.pk)
 
         
     return render(request, 'Visualize/data.html')
 
+def createfilegraph(filevisualize):
+    
+    plot_functions = {
+        "scatter": sns.scatterplot,
+        "line": sns.lineplot,
+        "bar": sns.barplot,
+        "histogram": sns.histplot,
+    }
+
+    fileurl = filevisualize.file.url
+    plottype = filevisualize.plottype
+    xlabelfile = filevisualize.xlabelfile
+    ylabelfile = filevisualize.ylabelfile
+
+
+    df = pd.read_excel(fileurl)
+
+    if plottype in plot_functions:
+        plot_functions[plottype](x=xlabelfile, y=ylabelfile, data=df)
+        plt.xlabel = xlabelfile
+        plt.ylabel = ylabelfile
+
+        image_buffer = BytesIO()
+        plt.savefig(image_buffer, format='png')
+        image_buffer.seek(0)
+
+    filename = f'graph{filevisualize.num}.png'
+    filevisualize.graph.save(filename, image_buffer)
+
+
 @login_required
-def filegraph(request, num):
+def fileGraph(request, num):
     filedata = FileVisualize.objects.filter(num=num).first()
+    createfilegraph(filedata)
     return render(request, 'Visualize/fileviz.html', filedata)
+
+

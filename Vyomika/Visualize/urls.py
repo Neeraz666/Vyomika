@@ -7,7 +7,9 @@ urlpatterns = [
     path('post/', views.createGraph, name='dataInput'),
     path('display/<int:snum>/', views.displayGraph, name='displayGraph'),
     path('visualizefile/', views.visualizeFile, name='vizfile'),
-    path('filedisplay/<int:num>/', views.filegraph, name='fileGraph'),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('filedisplay/<int:num>/', views.fileGraph, name='fileGraph'),
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
