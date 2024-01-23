@@ -131,6 +131,7 @@ def createfilegraph(filevisualize):
     xlabelfile = filevisualize.xlabelfile
     ylabelfile = filevisualize.ylabelfile
 
+    print(fileurl)
 
     df = pd.read_excel(fileurl)
 
